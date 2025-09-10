@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clear River Partners - Investment Management</title>
+    <style>
+        * {
+            --bg: #f7f8fb;
+            --surface: #ffffff;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+            --navy: #0b1f3a;
+            --gold: #d4af37;
+            --hero-overlay: rgba(11,31,58,0.65);
+            --radius: 10px;
+            --shadow: 0 8px 24px rgba(2,12,27,0.06);
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.65;
+            color: var(--text);
+            background: var(--bg);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--surface);
+            padding: 0.65rem 0;
+            border-bottom: 1px solid var(--border);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { font-size: 1.25rem; font-weight: 800; color: var(--navy); letter-spacing: .5px; }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        .nav-links a { text-decoration: none; color: var(--muted); font-weight: 600; font-size: 0.95rem; transition: color .2s ease; }
+
+        .nav-links a:hover { color: var(--navy); }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            padding: 160px 0 120px;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Sailing_On_the_Charles.jpg/2560px-Sailing_On_the_Charles.jpg') no-repeat center center/cover;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            color: #fff;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            color: #2c2c2c;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display:inline-block; background: var(--navy); color:#fff;
+            padding: 14px 40px; border:1px solid var(--navy); border-radius:999px;
+            font-weight:700; letter-spacing:.2px; transition: all .25s ease; box-shadow: 0 6px 16px rgba(11,31,58,.15);
+        }
+
+        .cta-button:hover { background: var(--gold); border-color: var(--gold); color:#1f2937; transform: translateY(-1px); box-shadow: 0 10px 24px rgba(212,175,55,.25);}
+
+        /* Main Content */
+        .main-content {
+            background: white;
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .about-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: #2c2c2c;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .about p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 96px 0;
+            background: #f9fafb;
+            border-top: 1px solid var(--border);
+        }
+
+        .services h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+            color: #2c2c2c;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.25rem;
+        }
+
+        .service-card {
+            background: var(--surface);
+            padding: 2rem;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            min-height: 180px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border-top: 3px solid var(--gold);
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 40px rgba(2,12,27,0.10);
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #333;
+            font-weight: 400;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Investment Focus */
+        .focus {
+            padding: 80px 0;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .focus-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .focus h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: #2c2c2c;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .focus p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+
+        .focus-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .focus-point {
+            padding: 2rem;
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+        }
+
+        .focus-number {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: #4a4a4a;
+            margin-bottom: 0.5rem;
+        }
+
+        .focus-point h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 400;
+        }
+
+        .focus-point p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 96px 0;
+            background: var(--navy);
+            color: #e5e7eb;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .contact p {
+            font-size: 1rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .contact-info {
+            margin-top: 2rem;
+        }
+
+        .contact-info p {
+            margin: 0.5rem 0;
+            font-size: 1rem;
+        }
+
+        .contact-button {
+            display: inline-block;
+            background: transparent;
+            color: white;
+            padding: 12px 35px;
+            text-decoration: none;
+            font-weight: 400;
+            border: 1px solid white;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-button:hover {
+            background: white;
+            color: #2c2c2c;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: #ccc;
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .about, .services, .focus, .contact {
+                padding: 60px 20px;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* Subtle animations */
+        .service-card, .focus-point {
+            opacity: 0.95;
+        }
+
+        .service-card:hover, .focus-point:hover {
+            opacity: 1;
+        }
+    
+        .hero::before { content:""; position:absolute; inset:0; background: var(--hero-overlay); z-index:1; }
+        .hero .container { position: relative; z-index: 2; }
+        .hero h1, .hero p { text-shadow: 0 3px 10px rgba(0,0,0,0.85); color:#fff; }
+        
+        .contact .container { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.25rem; max-width:900px; }
+
+    
+        @media (max-width: 768px) {
+            .reveal, .stagger > * { transition: none !important; transform: none !important; opacity: 1 !important; }
+            .hero .container { transform: none !important; }
+        }
+    
+        /* Reveal / Stagger animations */
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 700ms ease, transform 700ms ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .stagger > * { opacity: 0; transform: translateY(16px); }
+        .stagger.visible > * { opacity: 1; transform: translateY(0); }
+        .stagger.visible > *:nth-child(1) { transition: 500ms ease 0ms; }
+        .stagger.visible > *:nth-child(2) { transition: 500ms ease 60ms; }
+        .stagger.visible > *:nth-child(3) { transition: 500ms ease 120ms; }
+        @media (max-width: 768px) { .reveal, .stagger > * { transition: none !important; transform: none !important; opacity: 1 !important; } }
+
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='8' fill='%230b1f3a'/%3E%3Cpath d='M10 30c6-9 15-9 22 0M18 17l6 6 6-6' stroke='%23d4af37' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+    <meta name="theme-color" content="#0b1f3a">
+    <meta name="description" content="Clear River Partners — Strategic investment management focused on undervalued mid‑market opportunities.">
+    <meta property="og:title" content="Clear River Partners">
+    <meta property="og:description" content="Strategic investment management focused on undervalued mid‑market opportunities.">
+    <meta property="og:type" content="website">
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="nav-container">
+                <div class="logo">CLEAR RIVER PARTNERS</div>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#focus">Investment Focus</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h1>CLEAR RIVER PARTNERS</h1>
+            <p>Strategic investment management focused on identifying and acquiring undervalued mid-market opportunities with exceptional growth potential.</p>
+            <a href="#contact" class="cta-button">Contact the Team</a>
+        </div>
+    </section>
+
+    <div class="main-content">
+        <section id="about" class="about">
+            <div class="about-container">
+                <h2>About Our Firm</h2>
+                <p>Clear River Partners is a specialized investment firm dedicated to identifying undervalued companies in the mid-market sector. Our approach combines rigorous financial analysis with deep industry expertise to uncover opportunities that others may overlook.</p>
+                <p>We focus on acquiring well-positioned businesses with strong fundamentals that are trading below their intrinsic value. Through strategic improvements and operational optimization, we enhance these assets before presenting them to qualified buyers.</p>
+                <p>Our team brings decades of combined experience in investment banking, private equity, and corporate development, providing the expertise necessary to execute complex transactions and create substantial value for all stakeholders.</p>
+            </div>
+        </section>
+
+        <section id="services" class="services reveal">
+            <div class="container">
+                <h2>Our Services</h2>
+                <div class="services-grid stagger">
+                    <div class="service-card">
+                        <h3 style="margin:0 0 .25rem 0; font-weight:700; color:var(--text);">Control Investments</h3>
+                        <p style="color: var(--muted);">Acquire and grow non‑core divisions and overlooked assets.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3 style="margin:0 0 .25rem 0; font-weight:700; color:var(--text);">Structured Capital</h3>
+                        <p style="color: var(--muted);">Provide patient, flexible capital for complex situations.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3 style="margin:0 0 .25rem 0; font-weight:700; color:var(--text);">Operational Partnership</h3>
+                        <p style="color: var(--muted);">Work alongside management teams to accelerate value creation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="focus" class="focus">
+            <div class="focus-container">
+                <h2>Investment Parameters</h2>
+                <p>We target established mid-market companies with enterprise values typically ranging from $10 million to $500 million. Our focus is on businesses with proven business models, stable cash flows, and identifiable opportunities for value creation through strategic and operational improvements.</p>
+                
+                <div class="focus-points">
+                    <div class="focus-point">
+                        <div class="focus-number">$10M - $500M</div>
+                        <h4>Enterprise Value</h4>
+                        <p>Target range for acquisition consideration</p>
+                    </div>
+                    <div class="focus-point">
+                        <div class="focus-number">15% - 25%</div>
+                        <h4>Target IRR</h4>
+                        <p>Expected internal rate of return</p>
+                    </div>
+                    <div class="focus-point">
+                        <div class="focus-number">2.0x - 4.0x</div>
+                        <h4>Return Multiple</h4>
+                        <p>Targeted investment return multiple</p>
+                    </div>
+                    <div class="focus-point">
+                        <div class="focus-number">3 - 7 Years</div>
+                        <h4>Investment Period</h4>
+                        <p>Typical hold period for optimization</p>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="results-band reveal" aria-label="Representative Results" style="margin-top:2rem;background:#f8fafc;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.25rem;text-align:center;">
+                <div style="display:block;text-align:center;">
+                    <strong style="color:var(--text);">Representative Case — Building a Standalone Market Leader</strong>
+                </div>
+                <p style="margin-top:0.5rem;color:var(--muted);">
+                    Acquired a non‑core services division from a Fortune 500 parent and established it as an independent company.
+                    By focusing on pricing discipline, simplifying product lines, and professionalizing sales, we turned a neglected division into a growth platform.
+                </p>
+                <div class="results-kpis" role="list" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));justify-items:center;gap:.75rem;margin-top:.5rem;text-align:center;">
+                    <div class="results-kpi" role="listitem" style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:.9rem;text-align:center;">
+                        <div class="n" style="font-weight:800;color:var(--navy);font-size:1.15rem;">+390 bps</div>
+                        <div class="l" style="color:var(--muted);font-size:.85rem;">EBITDA Margin</div>
+                    </div>
+                    <div class="results-kpi" role="listitem" style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:.9rem;text-align:center;">
+                        <div class="n" style="font-weight:800;color:var(--navy);font-size:1.15rem;">+24%</div>
+                        <div class="l" style="color:var(--muted);font-size:.85rem;">Cash Conversion</div>
+                    </div>
+                    <div class="results-kpi" role="listitem" style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:.9rem;text-align:center;">
+                        <div class="n" style="font-weight:800;color:var(--navy);font-size:1.15rem;">3.1×</div>
+                        <div class="l" style="color:var(--muted);font-size:.85rem;">MOIC at Exit</div>
+                    </div>
+                </div>
+                <div class="testimonial-inline" id="testimonial" style="margin-top:1.25rem;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem;box-shadow:var(--shadow);text-align:center;">
+                    <p style="margin:0;color:var(--text);line-height:1.75;">
+                        “As CFO, I measure outcomes in numbers. Within two quarters Clear River’s playbook lifted margins nearly 400 basis points and freed up cash that had been stuck in working capital. Their discipline gave us both liquidity and confidence.”
+                    </p>
+                    <small style="display:block;color:var(--muted);margin-top:.35rem;">— <strong>Rob F.</strong>, CFO, Mid‑Market Industrial Services</small>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2>Contact Our Sales Team</h2>
+                <p>For inquiries regarding investment opportunities, partnership discussions, or general information about our services, please reach out to our team. We work exclusively with qualified investors and maintain the highest standards of confidentiality.</p>
+                <div class="contact-info">
+                    <p style="text-align:center;margin:0;"><strong>Email:</strong> <a href="mailto:info@clearriverpartners.com" style="color:#ffffff;text-decoration:underline;">info@clearriverpartners.com</a></p>
+                </div>
+                <br>
+                <a href="mailto:info@clearriverpartners.com" class="contact-button">CONTACT US</a>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Clear River Partners LLC. All rights reserved. Securities offered through registered representatives.</p>
+        </div>
+    
+            <p style="margin-top:1rem;font-size:0.75rem;opacity:0.6;">
+                For informational purposes only. Not an offer to sell or solicit an offer to buy any security.
+                Past performance is not indicative of future results. © Clear River Partners.
+            </p>
+            <p style="margin-top:0.5rem;font-size:0.75rem;opacity:0.6;">
+                <a href="#" style="color:#98a2b3;text-decoration:underline;">Privacy</a> ·
+                <a href="#" style="color:#98a2b3;text-decoration:underline;">Terms</a>
+            </p>
+
+    </footer>
+
+    <script>
+        // Wait for page to load
+        window.addEventListener('load', function() {
+            
+            // Function to check if element is in viewport
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top >= 0 &&
+                    rect.left >= 0 &&
+                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                );
+            }
+
+            // Function to animate elements
+            function animateElements() {
+                const elements = document.querySelectorAll('.animate-element, .animate-slide-left, .animate-slide-right');
+                
+                elements.forEach(element => {
+                    if (isInViewport(element) || element.getBoundingClientRect().top < window.innerHeight * 0.8) {
+                        element.classList.add('visible');
+                    }
+                });
+            }
+
+            // Run animation check on scroll and load
+            window.addEventListener('scroll', animateElements);
+            animateElements(); // Run once on load
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const target = document.getElementById(targetId);
+                    if (target) {
+                        const navHeight = 80;
+                        const targetPosition = target.offsetTop - navHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Active navigation highlighting
+            window.addEventListener('scroll', () => {
+                const sections = document.querySelectorAll('section[id]');
+                const navLinks = document.querySelectorAll('.nav-links a');
+                
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionHeight = section.offsetHeight;
+                    if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.style.color = '#555';
+                    link.style.fontWeight = '400';
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.style.color = '#333';
+                        link.style.fontWeight = '500';
+                    }
+                });
+            });
+        });
+    
+        // Reveal on scroll for .reveal and .stagger
+        (function() {
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        e.target.classList.add('visible');
+                        if (e.target.classList.contains('stagger')) {
+                            requestAnimationFrame(() => e.target.classList.add('visible'));
+                        }
+                        obs.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.12 });
+            document.querySelectorAll('.reveal, .stagger').forEach(el => obs.observe(el));
+        })();
+
+    </script>
+</body>
+</html>
